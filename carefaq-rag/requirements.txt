@@ -1,0 +1,4 @@
+streamlit
+rank-bm25
+scikit-learn
+pytest

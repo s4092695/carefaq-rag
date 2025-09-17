@@ -1,0 +1,6 @@
+/*Add eval/questions_known.jsonl with ≥10 “known” Qs (e.g., fees/hours) using correct gold_pids (e.g., fees_0).
+
+Add eval/run_retrieval_metrics.py: compute NDCG@1/3/5 + Top-3 hit for BM25 vs Vector (and +Rerank if enabled).
+Save a markdown table to results/final_metrics.md.
+DoD: python eval/run_retrieval_metrics.py prints and writes the 2–3 row table.
+*/

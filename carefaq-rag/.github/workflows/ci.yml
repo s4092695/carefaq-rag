@@ -1,0 +1,14 @@
+name: CI
+on: [push, pull_request]
+jobs:
+  test:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: python -m venv .venv
+      - run: .\.venv\Scripts\Activate.ps1; pip install -U pip; pip install -r requirements.txt
+      - run: .\.venv\Scripts\Activate.ps1; python scripts/make_chunks.py
+      - run: .\.venv\Scripts\Activate.ps1; pytest -q
