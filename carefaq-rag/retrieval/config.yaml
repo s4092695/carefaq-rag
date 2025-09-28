@@ -1,6 +1,6 @@
 chunk_size: 600
 overlap: 80
 top_k: 5
-retriever: vector     # bm25 | vector
-reranker: off         # on | off
+retriever: vector      # bm25 | vector
+reranker: on        
 emb_model: BAAI/bge-small-en-v1.5

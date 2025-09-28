@@ -9,15 +9,14 @@ def bm25(q):
     out = subprocess.check_output(["python", "retrieval/bm25_baseline.py", q]).decode().strip().splitlines()
     return [eval(l) for l in out] if out and out[0] else []
 
+
+from gen.rag_chain import answer as rag_answer
+
 if st.button("Ask") and q:
-    if needs_refusal(q):
-        st.warning(REFUSAL_TEXT)
-    else:
-        ctx = bm25(q)
-        if not ctx:
-            st.write("Sorry, I couldn't find this in our info.")
-        else:
-            st.write("**Answer (baseline placeholder):** Check the linked source for details.")
-            st.write("**Sources:**")
-            for c in ctx:
-                st.write(f"- {c.get('source_url','')}")
+    out = rag_answer(q, k=5)
+    st.write(out["answer"])
+    if out["sources"]:
+        st.write("**Sources:**")
+        for u in out["sources"]:
+            st.markdown(f"- [{u}]({u})")
+    st.caption(f"Method: {out.get('method','-')}")
