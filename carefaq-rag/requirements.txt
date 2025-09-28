@@ -8,3 +8,8 @@ numpy
 pyyaml
 faiss-cpu
 torch
+
+langchain
+langchain-core
+langchain-community
+langchain-ollama        
