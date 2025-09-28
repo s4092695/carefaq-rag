@@ -2,7 +2,7 @@ from pathlib import Path
 import json, re
 CHUNK=600; OVERLAP=80
 out = []
-for p in Path("carefaq-rag/kb/markdown").glob("*.md"):
+for p in Path("carefaq-rag\kb\markdown").glob("*.md"):
     raw = p.read_text(encoding="utf-8")
     url = re.search(r"^source_url:\s*(.*)$", raw, flags=re.M).group(1).strip()
     body = "\n".join(raw.splitlines()[3:])

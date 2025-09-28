@@ -2,3 +2,9 @@ streamlit
 rank-bm25
 scikit-learn
 pytest
+
+sentence-transformers
+numpy
+pyyaml
+faiss-cpu
+torch

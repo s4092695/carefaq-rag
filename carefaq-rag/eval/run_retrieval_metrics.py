@@ -1,53 +1,54 @@
 # eval/run_retrieval_metrics.py
-import json, math, pathlib
+import argparse, json, math, pathlib
+from typing import List
 from retrieval.bm25_baseline import search as bm25_search
 from retrieval.vector_search import search_vector
-from retrieval.get_contexts import CONFIG
+from eval.metrics import ndcg_at_k, mean
+from eval.utils_eval import load_passages
 
-KNOWN = "eval/questions_known.jsonl"
-OUT = pathlib.Path("results/final_metrics.md")
+HERE = pathlib.Path(__file__).parent
+DATA = HERE / "datasets" / "questions_known.jsonl"
+OUT = HERE / "results" / "retrieval_metrics.md"
 
-def ndcg_at_k(rel, k):
-    dcg = sum((g / math.log2(i+2)) for i,g in enumerate(rel[:k]))
-    idcg = sum((g / math.log2(i+2)) for i,g in enumerate(sorted(rel, reverse=True)[:k]))
-    return 0.0 if idcg == 0 else dcg/idcg
+def relevance_gains(retrieved_pids: List[str], gold_pids: List[str]) -> List[int]:
+    return [1 if pid in set(gold_pids) else 0 for pid in retrieved_pids]
 
-def _eval(path, method, k_vals=(1,3,5)):
-    qs = [json.loads(l) for l in open(path, encoding="utf-8")]
-    sums = {k:0.0 for k in k_vals}; hit3 = 0
-    for q in qs:
-        if method == "bm25":
-            res = bm25_search(q["question"], 5)
-        elif method == "vector":
-            res = search_vector(q["question"], 5)
-        else:  # vector + rerank (use get_contexts with reranker=on)
-            from retrieval.get_contexts import get_contexts
-            res = get_contexts(q["question"], 5)
+def eval_one(method_name: str, search_fn, k_list=(1,3,5)):
+    lines = [json.loads(l) for l in DATA.read_text(encoding="utf-8").splitlines() if l.strip()]
+    ndcg_rows = {k: [] for k in k_list}
+    hit3 = []
+    for row in lines:
+        q = row["question"]
+        gold_pids = row.get("gold_pids", [])
+        kmax = max(k_list)
+        res = search_fn(q, k=kmax)
+        retrieved_pids = [r.get("pid","") for r in res]
+        gains = relevance_gains(retrieved_pids, gold_pids)
+        for k in k_list:
+            ndcg_rows[k].append(ndcg_at_k(gains, k))
+        hit3.append(1.0 if any(gains[:3]) else 0.0)
+    summary = {f"NDCG@{k}": mean(ndcg_rows[k]) for k in k_list}
+    summary["Hit@3"] = mean(hit3)
+    return summary
 
-        ids = [r["pid"] for r in res]
-        rel = [1 if any(g in ids[i] for g in q["gold_pids"]) else 0 for i in range(len(ids))]
-        for K in k_vals: sums[K] += ndcg_at_k(rel, K)
-        if any(g in ids[:3] for g in q["gold_pids"]): hit3 += 1
-    n = max(1, len(qs))
-    return {f"NDCG@{K}": round(sums[K]/n,3) for K in k_vals} | {"Top3_Hit": f"{round(100*hit3/n)}%", "Q": n}
+def main():
+    ap = argparse.ArgumentParser()
+    ap.add_argument("--k", nargs="+", type=int, default=[1,3,5])
+    args = ap.parse_args()
+    k_list = tuple(args.k)
+
+    # BM25
+    bm = eval_one("bm25", bm25_search, k_list=k_list)
+    # Vector
+    ve = eval_one("vector", search_vector, k_list=k_list)
+
+    # Write markdown table
+    header = "| Method | " + " | ".join([f"NDCG@{k}" for k in k_list]) + " | Hit@3 |\n"
+    header += "|" + " --- |" * (len(k_list)+2) + "\n"
+    row_bm = "| BM25 | " + " | ".join([f"{bm[f'NDCG@{k}']:.3f}" for k in k_list]) + f" | {bm['Hit@3']:.3f} |\n"
+    row_ve = "| Vector | " + " | ".join([f"{ve[f'NDCG@{k}']:.3f}" for k in k_list]) + f" | {ve['Hit@3']:.3f} |\n"
+    OUT.write_text(header + row_bm + row_ve, encoding="utf-8")
+    print((header + row_bm + row_ve).strip())
 
 if __name__ == "__main__":
-    bm25 = _eval(KNOWN, "bm25")
-    vec  = _eval(KNOWN, "vector")
-    # optional rerank row if config says on
-    rr = None
-    if CONFIG.get("reranker","off") == "on":
-        rr = _eval(KNOWN, "vector+rerank")
-
-    table = (
-      "| Method | NDCG@1 | NDCG@3 | NDCG@5 | Top-3 Hit | Q |\n"
-      "|---|---:|---:|---:|---:|---:|\n"
-      f"| BM25          | {bm25['NDCG@1']} | {bm25['NDCG@3']} | {bm25['NDCG@5']} | {bm25['Top3_Hit']} | {bm25['Q']} |\n"
-      f"| Vector (bge)  | {vec['NDCG@1']} | {vec['NDCG@3']} | {vec['NDCG@5']} | {vec['Top3_Hit']} | {vec['Q']} |\n"
-    )
-    if rr:
-        table += f"| Vector + Rerank | {rr['NDCG@1']} | {rr['NDCG@3']} | {rr['NDCG@5']} | {rr['Top3_Hit']} | {rr['Q']} |\n"
-
-    OUT.parent.mkdir(exist_ok=True)
-    OUT.write_text(table, encoding="utf-8")
-    print(table)
+    main()

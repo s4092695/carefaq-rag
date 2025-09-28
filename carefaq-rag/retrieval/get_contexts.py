@@ -6,6 +6,7 @@ from typing import List, Dict
 # required: retrieval/bm25_baseline.py must expose search(q, k)
 from retrieval.bm25_baseline import search as bm25_search
 from retrieval.vector_search import search_vector
+from retrieval.cross_reranker import rerank
 
 CONFIG = {
     "chunk_size": 600,
