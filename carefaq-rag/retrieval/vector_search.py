@@ -14,10 +14,13 @@ except Exception:
 
 from sentence_transformers import SentenceTransformer
 
-# --- load corpus ---
-PASSAGES_PATH = Path("kb/chunks/passages.jsonl")
-if not PASSAGES_PATH.exists():
-    raise FileNotFoundError("kb/chunks/passages.jsonl not found. Run: python scripts/make_chunks.py")
+from pathlib import Path
+import os, json, numpy as np
+
+ROOT = Path(__file__).resolve().parents[1]           # .../carefaq-rag/
+PASSAGES_PATH = ROOT / "kb" / "chunks" / "passages.jsonl"
+INDEX_DIR     = ROOT / "kb" / "index"
+EMB_MODEL = os.getenv("EMB_MODEL", "BAAI/bge-small-en-v1.5")
 
 passages = [json.loads(l) for l in open(PASSAGES_PATH, encoding="utf-8")]
 texts = [p["text"] for p in passages]

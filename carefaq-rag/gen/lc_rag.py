@@ -15,13 +15,34 @@ def _format_docs(ctxs: List[Dict]) -> str:
         blocks.append(f"[{i}] {txt}\nSOURCE: {c.get('source_url','')}")
     return "\n\n".join(blocks)
 
+# gen/lc_rag.py (keep your imports)
 PROMPT = ChatPromptTemplate.from_messages([
     ("system",
-     "You are a careful assistant for clinic FAQs. "
-     "Answer ONLY with facts from <CONTEXT>. If the answer is not clearly in the context, reply exactly with NO_ANSWER. "
-     "Prefer copying short sentences verbatim. Add bracketed citations like [1] or [2] matching the context blocks you used."),
+     "You are a careful assistant for clinic FAQs.\n"
+     "• Answer ONLY with facts from <CONTEXT>.\n"
+     "• If the answer is not clearly in the context, reply exactly: NO_ANSWER.\n"
+     "• Do NOT restate the question.\n"
+     "• Prefer copying one short sentence verbatim.\n"
+     "• Add bracketed citations like [1] or [2] matching the context blocks you used."
+    ),
     ("human", "Question: {question}\n\n<CONTEXT>\n{context}\n</CONTEXT>")
 ])
+
+def _clean(text: str, question: str) -> str:
+    t = (text or "").strip()
+    # treat any mention of NO_ANSWER (case-insensitive) as no answer
+    if "no_answer" in t.lower():
+        return "NO_ANSWER"
+    # strip leading echo of the question if present
+    ql = question.strip().lower()
+    tl = t.lower()
+    if tl.startswith(ql):
+        t = t[len(question):].lstrip(" :,-")
+    # keep at most 2 sentences
+    import re
+    parts = re.split(r'(?<=[.!?])\s+', t.strip())
+    return " ".join(parts[:2]).strip()
+
 
 def _to_sources(ctxs: List[Dict], answer_text: str) -> List[str]:
     # if the model cited [k], keep only those URLs; else return top-1 URL
@@ -62,18 +83,16 @@ def answer_lc(question: str, k: int | None = None) -> Dict:
     )
 
     text = chain.invoke({"question": question, "source_documents": ctxs}).strip()
+    text = _clean(text, question)
 
     if text == "NO_ANSWER":
-        return {"answer": "", "sources": [], "method": "noanswer", "latency_ms": round((time.time()-t0)*1000,1)}
+        return {"answer": "", "sources": [], "method": "noanswer",
+            "latency_ms": round((time.time()-t0)*1000,1)}
 
-    # Keep it concise: take first ~2 sentences (helps your eval faithfulness)
-    short = re.split(r'(?<=[.!?])\s+', text.strip())
-    short_text = " ".join(short[:2]).strip()
-
-    sources = _to_sources(ctxs, short_text)
+    sources = _to_sources(ctxs, text)
     return {
-        "answer": short_text,
-        "sources": sources,
-        "method": "gen-lc",
-        "latency_ms": round((time.time()-t0)*1000,1)
+    "answer": text,
+    "sources": sources,
+    "method": "gen-lc",
+    "latency_ms": round((time.time()-t0)*1000,1)
     }

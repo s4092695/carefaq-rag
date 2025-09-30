@@ -1,12 +1,13 @@
-# scripts/build_index.py
-import os, json, numpy as np
 from pathlib import Path
+import os, json, numpy as np
 from sentence_transformers import SentenceTransformer
 
-EMB_MODEL = os.getenv("EMB_MODEL", "BAAI/bge-small-en-v1.5")
-PASSAGES = Path("carefaq-rag/kb/chunks/passages.jsonl")
-OUT_DIR  = Path("carefaq-rag/kb/index")
-OUT_DIR.mkdir(parents=True, exist_ok=True)
+from pathlib import Path
+ROOT = Path(__file__).resolve().parents[1]         # .../carefaq-rag/
+PASSAGES_PATH = ROOT / "kb" / "chunks" / "passages.jsonl"
+INDEX_DIR     = ROOT / "kb" / "index"
+
+
 
 def main():
     rows = [json.loads(l) for l in PASSAGES.read_text(encoding="utf-8").splitlines() if l.strip()]
