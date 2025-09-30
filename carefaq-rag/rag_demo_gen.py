@@ -12,3 +12,5 @@ for q in qs:
     print("A:", out.get("answer") or "<no answer>")
     print("Sources:", out.get("sources", []))
     print("-"*50)
+
+#call eval/run_retrieval_metrics to give metrics with each question

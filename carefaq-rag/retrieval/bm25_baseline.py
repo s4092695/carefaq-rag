@@ -10,6 +10,6 @@ def search(q, k=5):
     top = sorted(zip(idx, scores), key=lambda x: -x[1])[:k]
     return [{"pid": passages[i]["pid"], "source_url": passages[i]["source_url"], "score": float(s)} for i,s in top]
 if __name__ == "__main__":
-    q = " ".join(sys.argv[1:]) or "Do you bulk bill pensioners?"
+    q = " ".join(sys.argv[1:]) or "What are the clinic opening hours?"
     for r in search(q, k=5):
         print(r)
