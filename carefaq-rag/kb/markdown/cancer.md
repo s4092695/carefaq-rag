@@ -2,7 +2,7 @@ source_url: https://www.canberrahealthservices.act.gov.au/before,-during-and-aft
 page_section: Coming for cancer treatment
 last_updated: 2025-09-17
 
-f you or your loved one is coming to hospital for cancer treatment you have probably got lots of questions.
+If you or your loved one is coming to hospital for cancer treatment you have probably got lots of questions.
 Use our information below to help you before, during and after your stay at the Canberra Region Cancer Centre. You can also download and print Receiving Cancer Care at CHS.
 
 Before you arrive
