@@ -1,0 +1,18 @@
+qid,question,matched_gold_pid_count,input_urls
+a101,What accessibility options are available on the Canberra Health Services website?,0,https://www.canberrahealthservices.act.gov.au/services/accessibility
+a102,"If I'm coming for cancer treatment, what should I bring with me?",0,https://www.canberrahealthservices.act.gov.au/services/cancer
+a103,Do I need a referral to attend a Walk-in Centre?,0,https://www.canberrahealthservices.act.gov.au/services/faq
+a104,What are the opening hours of Walk-in Centres in Canberra?,0,https://www.canberrahealthservices.act.gov.au/services/hours
+a105,Will I have to pay for my care when I visit the Emergency Department?,0,https://www.canberrahealthservices.act.gov.au/services/fees
+a106,How can I access my health record after leaving the Emergency Department?,0,https://www.canberrahealthservices.act.gov.au/services/results
+a107,Can I get my test results online?,0,https://www.canberrahealthservices.act.gov.au/services/results
+a108,What should I do before a telehealth appointment?,0,https://www.canberrahealthservices.act.gov.au/services/telehealth
+a109,Can doctors at Canberra Hospital provide prescriptions before I go home?,0,https://www.canberrahealthservices.act.gov.au/services/scripts
+a110,What vaccines are offered in the ACT High School Immunisation Program?,0,https://www.canberrahealthservices.act.gov.au/services/vaccines
+a111,Do Walk-in Centres treat children?,0,https://www.canberrahealthservices.act.gov.au/services/faq
+a112,Where can I find a list of services and clinics provided by Canberra Health Services?,0,https://www.canberrahealthservices.act.gov.au/services/referrals
+a201,What are the current COVID-19 case numbers in Canberra?,0,https://www.canberrahealthservices.act.gov.au/services
+a202,Does Canberra Health Services provide dental braces for teenagers?,0,https://www.canberrahealthservices.act.gov.au/services
+a203,What is the cost of private health insurance in the ACT?,0,https://www.canberrahealthservices.act.gov.au/services
+a204,How do I book a GP appointment in Sydney?,0,https://www.canberrahealthservices.act.gov.au/services
+a205,What are the visiting hours at Royal Melbourne Hospital?,0,https://www.canberrahealthservices.act.gov.au/services

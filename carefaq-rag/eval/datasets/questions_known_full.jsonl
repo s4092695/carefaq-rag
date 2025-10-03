@@ -1,0 +1,17 @@
+{"qid": "a101", "tag": "accessibility", "question": "What accessibility options are available on the Canberra Health Services website?", "gold_pids": []}
+{"qid": "a102", "tag": "cancer", "question": "If I'm coming for cancer treatment, what should I bring with me?", "gold_pids": []}
+{"qid": "a103", "tag": "referrals", "question": "Do I need a referral to attend a Walk-in Centre?", "gold_pids": []}
+{"qid": "a104", "tag": "hours", "question": "What are the opening hours of Walk-in Centres in Canberra?", "gold_pids": []}
+{"qid": "a105", "tag": "fees", "question": "Will I have to pay for my care when I visit the Emergency Department?", "gold_pids": []}
+{"qid": "a106", "tag": "results", "question": "How can I access my health record after leaving the Emergency Department?", "gold_pids": []}
+{"qid": "a107", "tag": "results", "question": "Can I get my test results online?", "gold_pids": []}
+{"qid": "a108", "tag": "telehealth", "question": "What should I do before a telehealth appointment?", "gold_pids": []}
+{"qid": "a109", "tag": "scripts", "question": "Can doctors at Canberra Hospital provide prescriptions before I go home?", "gold_pids": []}
+{"qid": "a110", "tag": "vaccines", "question": "What vaccines are offered in the ACT High School Immunisation Program?", "gold_pids": []}
+{"qid": "a111", "tag": "faq", "question": "Do Walk-in Centres treat children?", "gold_pids": []}
+{"qid": "a112", "tag": "referrals", "question": "Where can I find a list of services and clinics provided by Canberra Health Services?", "gold_pids": []}
+{"qid": "a201", "tag": "covid", "question": "What are the current COVID-19 case numbers in Canberra?", "gold_pids": []}
+{"qid": "a202", "tag": "dental", "question": "Does Canberra Health Services provide dental braces for teenagers?", "gold_pids": []}
+{"qid": "a203", "tag": "insurance", "question": "What is the cost of private health insurance in the ACT?", "gold_pids": []}
+{"qid": "a204", "tag": "gp", "question": "How do I book a GP appointment in Sydney?", "gold_pids": []}
+{"qid": "a205", "tag": "hospital", "question": "What are the visiting hours at Royal Melbourne Hospital?", "gold_pids": []}
