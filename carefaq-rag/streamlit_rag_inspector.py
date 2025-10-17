@@ -67,6 +67,36 @@ def pid_to_docid(pid: str, pid2rec: Dict[str, Dict]) -> str:
 # -----------------------------
 # Retrieval adapters
 # -----------------------------
+# --- Emergency refusal config ---
+EMERGENCY_TEXT = (
+    "🚨 I’m not able to help with emergencies. If you or someone else needs urgent medical help, "
+    "call your local emergency number immediately (e.g., 000 AU / 911 US / 112 EU) or go to the nearest emergency department."
+)
+MENTAL_HEALTH_TEXT = (
+    "If you’re in immediate danger or thinking about harming yourself, call your local emergency number now "
+    "or a crisis line in your area. You’re not alone."
+)
+# Optional region-specific info — customize as needed
+REGIONAL_NOTE = "Australia: call 000. Non-emergency nurse advice: Healthdirect 1800 022 222."
+
+EMERGENCY_KEYWORDS = [
+    "emergency", "urgent", "life threatening", "life-threatening",
+    "chest pain", "shortness of breath", "severe bleeding", "unconscious",
+    "stroke", "heart attack", "anaphylaxis", "overdose"
+]
+MENTAL_HEALTH_KEYWORDS = [
+    "suicidal", "suicide", "self harm", "self-harm", "kill myself", "end my life",
+    "harm myself", "hurt myself", "crisis hotline", "mental health emergency"
+]
+
+def is_emergency_intent(q: str) -> bool:
+    ql = q.lower()
+    return any(k in ql for k in EMERGENCY_KEYWORDS)
+
+def is_mental_health_intent(q: str) -> bool:
+    ql = q.lower()
+    return any(k in ql for k in MENTAL_HEALTH_KEYWORDS)
+
 def search_vector(query: str, k: int = 5, pool_k: int = 200) -> List[Tuple[str, float]]:
     """
     Returns a list of (pid, score) in DESC order.
@@ -309,11 +339,22 @@ else:
 
 tabs = st.tabs(["Single Query", "Batch Eval"])
 
+
+
 with tabs[0]:
     st.subheader("Single Query Inspector")
     q = st.text_area("Enter a question", height=80, placeholder="e.g., Do you accept walk-ins without referral?")
     run = st.button("Run")
     if run and q.strip():
+        if is_mental_health_intent(q):
+            st.error(MENTAL_HEALTH_TEXT)
+            st.caption(REGIONAL_NOTE)
+            st.stop()
+
+        if is_emergency_intent(q):
+            st.error(EMERGENCY_TEXT)
+            st.caption(REGIONAL_NOTE)
+            st.stop()
         # Retrieve
         pid2rec = st.session_state.get("pid2rec", {})
         if not pid2rec:

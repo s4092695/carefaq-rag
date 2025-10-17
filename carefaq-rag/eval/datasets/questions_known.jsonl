@@ -1,2 +1,43 @@
-{"qid":"a101","question":"What accessibility options are available on the Canberra Health Services website?","gold_pids":["accessibility_0"],"tag":"accessibility"}
-{"qid":"a103","question":"Do I need a referral to attend a Walk-in Centre?","gold_pids":["referrals_0"],"tag":"referrals"}
+{"qid":"a101","tag":"accessibility","question":"What accessibility options are available on the Canberra Health Services website?","gold_pids":["accessibility"]}
+{"qid":"a102","tag":"cancer","question":"If I'm coming for cancer treatment, what should I bring with me?","gold_pids":["cancer"]}
+{"qid":"a103","tag":"referrals","question":"Do I need a referral to attend a Walk-in Centre?","gold_pids":["faq","FAQ"]}
+{"qid":"a104","tag":"hours","question":"What are the opening hours of Walk-in Centres in Canberra?","gold_pids":["hours"]}
+{"qid":"a105","tag":"fees","question":"Will I have to pay for my care when I visit the Emergency Department?","gold_pids":["fees"]}
+{"qid":"a106","tag":"results","question":"How can I access my health record after leaving the Emergency Department?","gold_pids":["results"]}
+{"qid":"a107","tag":"results","question":"Can I get my test results online?","gold_pids":["results"]}
+{"qid":"a108","tag":"telehealth","question":"What should I do before a telehealth appointment?","gold_pids":["telehealth"]}
+{"qid":"a109","tag":"scripts","question":"Can doctors at Canberra Hospital provide prescriptions before I go home?","gold_pids":["scripts"]}
+{"qid":"a110","tag":"vaccines","question":"What vaccines are offered in the ACT High School Immunisation Program?","gold_pids":["vaccines"]}
+{"qid":"a111","tag":"faq","question":"Do Walk-in Centres treat children?","gold_pids":["faq","FAQ"]}
+{"qid":"a112","tag":"referrals","question":"Where can I find a list of services and clinics provided by Canberra Health Services?","gold_pids":["referrals"]}
+{"qid":"a113","tag":"referrals","question":"How do I get a referral to a specialist at Canberra Health Services?","gold_pids":["referrals"]}
+{"qid":"a114","tag":"hours","question":"Are Walk-in Centres open on public holidays?","gold_pids":["hours"]}
+{"qid":"a115","tag":"faq","question":"Do Walk-in Centres treat minor injuries and illnesses?","gold_pids":["faq","FAQ"]}
+{"qid":"a116","tag":"telehealth","question":"Can I use my phone for a telehealth video appointment?","gold_pids":["telehealth"]}
+{"qid":"a117","tag":"telehealth","question":"What should I do if my telehealth link doesn’t work?","gold_pids":["telehealth"]}
+{"qid":"a118","tag":"results","question":"How do I request a copy of my medical record?","gold_pids":["results"]}
+{"qid":"a119","tag":"scripts","question":"Where do I get my discharge medications?","gold_pids":["scripts"]}
+{"qid":"a120","tag":"vaccines","question":"Do students need parental consent for school immunisations?","gold_pids":["vaccines"]}
+{"qid":"a121","tag":"vaccines","question":"Are catch-up vaccinations available if a student missed a dose?","gold_pids":["vaccines"]}
+{"qid":"a122","tag":"fees","question":"Do I need to pay if I am treated and discharged from the Emergency Department?","gold_pids":["fees"]}
+{"qid":"a123","tag":"fees","question":"Will my private health insurance cover the ED attendance fee?","gold_pids":["fees"]}
+{"qid":"a124","tag":"faq","question":"Do I need an appointment for a Walk-in Centre?","gold_pids":["faq","FAQ"]}
+{"qid":"a125","tag":"accessibility","question":"Can the website read pages aloud to me?","gold_pids":["accessibility"]}
+{"qid":"a126","tag":"cancer","question":"Where can I park when visiting the Cancer Centre?","gold_pids":["cancer"]}
+{"qid":"a127","tag":"cancer","question":"What support services are available at the Cancer Centre?","gold_pids":["cancer"]}
+{"qid":"a128","tag":"referrals","question":"Where can my GP send a referral?","gold_pids":["referrals"]}
+{"qid":"a129","tag":"results","question":"Can I see my test results in My Health Record?","gold_pids":["results"]}
+{"qid":"a130","tag":"hours","question":"What time is the last registration at Walk-in Centres?","gold_pids":["hours"]}
+{"qid":"a131","tag":"faq","question":"Do you treat children under one year old at Walk-in Centres?","gold_pids":["faq","FAQ"]}
+{"qid":"a132","tag":"referrals","question":"How do I search for the right service for my condition?","gold_pids":["referrals"]}
+{"qid":"a201","tag":"covid","question":"What are the current COVID-19 case numbers in Canberra?","gold_pids":[]}
+{"qid":"a202","tag":"dental","question":"Does Canberra Health Services provide dental braces for teenagers?","gold_pids":[]}
+{"qid":"a203","tag":"insurance","question":"What is the cost of private health insurance in the ACT?","gold_pids":[]}
+{"qid":"a204","tag":"gp","question":"How do I book a GP appointment in Sydney?","gold_pids":[]}
+{"qid":"a205","tag":"hospital","question":"What are the visiting hours at Royal Melbourne Hospital?","gold_pids":[]}
+{"qid":"a206","tag":"parking","question":"How much does parking cost at Sydney Children’s Hospital?","gold_pids":[]}
+{"qid":"a207","tag":"pharmacy","question":"What are the opening hours of the Newtown community pharmacy?","gold_pids":[]}
+{"qid":"a208","tag":"privateclinic","question":"How do I book at a private clinic in Melbourne?","gold_pids":[]}
+{"qid":"a209","tag":"international","question":"What’s the process to get medical treatment in New Zealand as a visitor?","gold_pids":[]}
+{"qid":"a210","tag":"weather","question":"Will the Walk-in Centre close during severe weather warnings?","gold_pids":[]}
+
